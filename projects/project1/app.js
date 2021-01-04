@@ -5,6 +5,10 @@ import { RGBELoader } from '../../libs/three/jsm/RGBELoader.js';
 import { OrbitControls } from '../../libs/three/jsm/OrbitControls.js';
 import { LoadingBar } from '../../libs/LoadingBar.js';
 import { vector3ToString } from '../../libs/DebugUtils.js';
+import { Stats } from '../../libs/stats.module.js';
+import { ARButton } from '../../libs/ARButton.js';
+
+let modelViewerObj;
 
 class App{
 	constructor(){
@@ -31,7 +35,7 @@ class App{
         this.renderer.physicallyCorrectLights = true;
         this.setEnvironment();
 		container.appendChild( this.renderer.domElement );
-		
+        
         //Add code here
         this.loadingBar = new LoadingBar();
         this.loadGLTF(); //or this.loadFBX();
@@ -40,32 +44,16 @@ class App{
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
         this.controls.target.set(0, 3.5, 0);
         this.controls.update();
+
+        this.initScene();
+        this.setupAR();
         
         window.addEventListener('resize', this.resize.bind(this) );
-	}	
-    
-    setEnvironment(){
-        const loader = new RGBELoader().setDataType( THREE.UnsignedByteType );
-        const pmremGenerator = new THREE.PMREMGenerator( this.renderer );
-        pmremGenerator.compileEquirectangularShader();
-        
-        const self = this;
-        
-        loader.load( '../../assets/hdr/venice_sunset_1k.hdr', ( texture ) => {
-          const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
-          pmremGenerator.dispose();
-
-          self.scene.environment = envMap;
-
-        }, undefined, (err)=>{
-            console.error( 'An error occurred setting the environment');
-        } );
     }
-    
+
     loadGLTF(){
         const self = this;
         const loader = new GLTFLoader().setPath('../../assets/');
-
         loader.load(
             'office-chair.glb',
             function(gltf){
@@ -109,6 +97,55 @@ class App{
         )
     }
     
+    initScene(){
+         this.geometry = new THREE.BoxBufferGeometry( 0.06, 0.06, 0.06 ); 
+         this.meshes = [];      
+    }
+    
+    setupAR(){
+         this.renderer.xr.enabled = true; 
+        
+         const self = this;
+         let controller;
+        
+        function onSelect() {
+            const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
+            const mesh = new THREE.Mesh( self.geometry, material );
+            mesh.position.set( 0, 0, - 0.3 ).applyMatrix4( controller.matrixWorld );
+            mesh.quaternion.setFromRotationMatrix( controller.matrixWorld );
+            self.scene.add( mesh );
+            self.meshes.push( mesh );
+        }
+
+        const btn = new ARButton( this.renderer );
+
+        //"LOADED_GLTF".visible = false;
+
+         controller = this.renderer.xr.getController( 0 );
+         controller.addEventListener( 'select', onSelect );
+         this.scene.add( controller );
+        
+        // this.renderer.setAnimationLoop( this.render.bind(this) );
+    }
+    
+    setEnvironment(){
+        const loader = new RGBELoader().setDataType( THREE.UnsignedByteType );
+        const pmremGenerator = new THREE.PMREMGenerator( this.renderer );
+        pmremGenerator.compileEquirectangularShader();
+        
+        const self = this;
+        
+        loader.load( '../../assets/hdr/venice_sunset_1k.hdr', ( texture ) => {
+          const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
+          pmremGenerator.dispose();
+
+          self.scene.environment = envMap;
+
+        }, undefined, (err)=>{
+            console.error( 'An error occurred setting the environment');
+        } );
+    }
+    
     resize(){
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
@@ -116,7 +153,14 @@ class App{
     }
     
 	render( ) {   
-        this.chair.rotateY( 0.01 );
+        this.chair.rotateY( 0.01 );   
+        // if(this.renderer.xr.enabled == true)
+        // {
+        //     if(this.chair.visible == true)
+        //         this.chair.visible = false;
+        // }
+        //this.stats.update();
+        this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
     }
 }

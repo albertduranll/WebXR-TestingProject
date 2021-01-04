@@ -138,9 +138,7 @@ class ARButton{
                 currentSession.end();
 
             }
-
         };
-
     }
 
     disableButton(button) {
@@ -187,9 +185,6 @@ class ARButton{
         element.style.zIndex = '999';
 
     }
-
-		
-
 };
 
 export { ARButton };
