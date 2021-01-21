@@ -117,6 +117,8 @@ class App{
             mesh.quaternion.setFromRotationMatrix( controller.matrixWorld );
             self.scene.add( mesh );
             self.meshes.push( mesh );
+
+            this.chairBool = truess
         }
 
         // function on(){
