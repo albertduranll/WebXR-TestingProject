@@ -160,7 +160,6 @@ class App{
          {
              this.chair.visible = false;
          }
-        //this.stats.update();
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
     }
