@@ -121,10 +121,6 @@ class App{
             this.chairBool = truess
         }
 
-        // function on(){
-        //     this.chairBool = true;
-        // }
-
         const btn = new ARButton( this.renderer );
         //btn.addEventListener('ModelViewer', )
         //btn.onSessionStart(this.chairBool = true);
