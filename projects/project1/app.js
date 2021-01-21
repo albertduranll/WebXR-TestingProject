@@ -13,7 +13,9 @@ let modelViewerObj;
 class App{
 	constructor(){
 		const container = document.createElement( 'div' );
-		document.body.appendChild( container );
+        document.body.appendChild( container );
+        
+        this.chairBool = false;
         
 		this.camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 100 );
 		this.camera.position.set( 0, 4, 14 );
@@ -105,6 +107,8 @@ class App{
     setupAR(){
          this.renderer.xr.enabled = true; 
         
+        this.chairBool = true;
+
          const self = this;
          let controller;
         
@@ -153,8 +157,8 @@ class App{
     }
     
 	render( ) {   
-        this.chair.rotateY( 10 );   
-        if(this.renderer.xr.enabled == true)
+        this.chair.rotateY( 0.1 );   
+        if(this.chairBool == true)
         {
             if(this.chair.visible == true)
                 this.chair.visible = false;
