@@ -125,7 +125,7 @@ class App{
 
         const btn = new ARButton( this.renderer );
         //btn.addEventListener('ModelViewer', )
-        btn.onSessionStart(this.chairBool = true);
+        //btn.onSessionStart(this.chairBool = true);
         //"LOADED_GLTF".visible = false;
 
          controller = this.renderer.xr.getController( 0 );
