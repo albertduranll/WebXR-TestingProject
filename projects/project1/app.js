@@ -119,9 +119,13 @@ class App{
             self.meshes.push( mesh );
         }
 
-        const btn = new ARButton( this.renderer );
-        btn.addEventListener(this.chairBool = true);
+        // function on(){
+        //     this.chairBool = true;
+        // }
 
+        const btn = new ARButton( this.renderer );
+        //btn.addEventListener('ModelViewer', )
+        btn.onSessionStart(this.chairBool = true);
         //"LOADED_GLTF".visible = false;
 
          controller = this.renderer.xr.getController( 0 );
