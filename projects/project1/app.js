@@ -8,12 +8,12 @@ import { vector3ToString } from '../../libs/DebugUtils.js';
 import { Stats } from '../../libs/stats.module.js';
 import { ARButton } from '../../libs/ARButton.js';
 
+let modelViewerObj;
+
 class App{
 	constructor(){
 		const container = document.createElement( 'div' );
-        document.body.appendChild( container );
-
-        this.boolChair = true;
+		document.body.appendChild( container );
         
 		this.camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 100 );
 		this.camera.position.set( 0, 4, 14 );
@@ -104,8 +104,6 @@ class App{
     
     setupAR(){
          this.renderer.xr.enabled = true; 
-
-         this.boolChair = false;
         
          const self = this;
          let controller;
@@ -156,10 +154,12 @@ class App{
     
 	render( ) {   
         this.chair.rotateY( 0.01 );   
-         if(this.boolChair == false)
-         {
-             this.chair.visible = false;
-         }
+        // if(this.renderer.xr.enabled == true)
+        // {
+        //     if(this.chair.visible == true)
+        //         this.chair.visible = false;
+        // }
+        //this.stats.update();
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
     }
