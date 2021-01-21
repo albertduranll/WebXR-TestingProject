@@ -159,11 +159,11 @@ class App{
 	render( ) {   
         this.chair.rotateY( 0.1 );
 
-        if(this.chairBool == true)
-        {
-            if(this.chair.visible == true)
-                this.chair.visible = false;
-        }
+        // if(this.chairBool == true)
+        // {
+        //     if(this.chair.visible == true)
+        //         this.chair.visible = false;
+        // }
         //this.stats.update();
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
