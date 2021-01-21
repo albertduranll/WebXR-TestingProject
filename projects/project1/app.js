@@ -35,7 +35,7 @@ class App{
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
         this.renderer.outputEncoding = THREE.sRGBEncoding;
         this.renderer.physicallyCorrectLights = true;
-        this.setEnvironment();
+        //this.setEnvironment();
 		container.appendChild( this.renderer.domElement );
         
         //Add code here
