@@ -118,11 +118,11 @@ class App{
             self.scene.add( mesh );
             self.meshes.push( mesh );
 
-            this.chairBool = true;
+            this.chair.visible = false;
         }
 
         const btn = new ARButton( this.renderer );
-        btn.addEventListener('ModelViewer', deactivateModelViewer());
+        //btn.addEventListener('ModelViewer', deactivateModelViewer());
         //btn.onSessionStart(this.chairBool = true);
         //"LOADED_GLTF".visible = false;
 
@@ -156,20 +156,15 @@ class App{
         this.camera.updateProjectionMatrix();
         this.renderer.setSize( window.innerWidth, window.innerHeight );  
     }
-
-    deactivateModelViewer(){
-        if(this.chair.visible == true)
-        this.chair.visible = false;
-    }
     
 	render( ) {   
         this.chair.rotateY( 0.01 );
 
-        //  if(this.chairBool == true)
-        //  {
+        // if(this.chairBool == true)
+        // {
         //     if(this.chair.visible == true)
-        //         this.chair.visible = false;
-        //  }
+        //        this.chair.visible = false;
+        // }
         //this.stats.update();
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
