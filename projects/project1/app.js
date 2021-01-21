@@ -118,7 +118,7 @@ class App{
             self.scene.add( mesh );
             self.meshes.push( mesh );
 
-            this.chairBool = truess
+            this.chairBool = true;
         }
 
         const btn = new ARButton( this.renderer );
@@ -158,7 +158,7 @@ class App{
     }
     
 	render( ) {   
-        this.chair.rotateY( 0.1 );
+        this.chair.rotateY( 0.01 );
 
          if(this.chairBool == true)
          {
