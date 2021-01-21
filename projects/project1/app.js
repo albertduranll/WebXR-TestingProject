@@ -157,7 +157,8 @@ class App{
     }
     
 	render( ) {   
-        this.chair.rotateY( 0.1 );   
+        this.chair.rotateY( 0.1 );
+        //Model viewer control  
         if(this.chairBool == true)
         {
             if(this.chair.visible == true)
