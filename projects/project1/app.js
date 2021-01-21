@@ -158,10 +158,9 @@ class App{
         this.chair.rotateY( 0.01 );   
          if(this.boolChair == false)
          {
-             if(this.chair.visible == true)
-                 this.chair.visible = false;
+             this.chair.visible = false;
          }
-        this.stats.update();
+        //this.stats.update();
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
     }
