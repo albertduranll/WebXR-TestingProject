@@ -117,8 +117,6 @@ class App{
             mesh.quaternion.setFromRotationMatrix( controller.matrixWorld );
             self.scene.add( mesh );
             self.meshes.push( mesh );
-
-            this.chair.visible = false;
         }
 
         const btn = new ARButton( this.renderer );
@@ -160,11 +158,10 @@ class App{
 	render( ) {   
         this.chair.rotateY( 0.01 );
 
-        // if(this.chairBool == true)
-        // {
-        //     if(this.chair.visible == true)
-        //        this.chair.visible = false;
-        // }
+         if(this.meshes.length > 0)
+         {
+            this.chair.visible = false;
+         }
         //this.stats.update();
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
