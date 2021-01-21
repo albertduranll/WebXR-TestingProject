@@ -153,7 +153,7 @@ class App{
     }
     
 	render( ) {   
-        this.chair.rotateY( 0.01 );   
+        this.chair.rotateY( 0.5 );   
         if(this.renderer.xr.enabled == true)
         {
             if(this.chair.visible == true)
