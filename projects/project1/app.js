@@ -35,7 +35,7 @@ class App{
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
         this.renderer.outputEncoding = THREE.sRGBEncoding;
         this.renderer.physicallyCorrectLights = true;
-        //this.setEnvironment();
+        this.setEnvironment();
 		container.appendChild( this.renderer.domElement );
         
         //Add code here
@@ -158,6 +158,7 @@ class App{
          if(this.meshes.length > 0)
          {
             this.chair.visible = false;
+            this.scene.background.visible = false;
          }
         //this.stats.update();
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
