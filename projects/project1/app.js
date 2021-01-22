@@ -21,10 +21,10 @@ class App{
 		this.camera.position.set( 0, 4, 14 );
         
 		this.scene = new THREE.Scene();
-        //this.scene.background = new THREE.Color( 0xaaaaaa );
+        this.scene.background = new THREE.Color( 0xaaaaaa );
 
 		const ambient = new THREE.HemisphereLight(0xffffff, 0x666666, 0.3);
-		this.scene.add(ambient);
+        this.scene.add(ambient);
         
         const light = new THREE.DirectionalLight();
         light.position.set( 0.2, 1, 1.5);
@@ -155,11 +155,12 @@ class App{
 	render( ) {   
         this.chair.rotateY( 0.01 );
 
-         if(this.meshes.length > 0)
-         {
-            this.chair.visible = false;
-            //this.scene.background = new THREE.Color( 0xaaaaaa );
-         }
+        if(this.meshes.length > 0)
+        {
+          this.chair.visible = false;
+          this.scene.background.enabled = false;
+        }
+
         //this.stats.update();
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
