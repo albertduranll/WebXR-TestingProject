@@ -157,8 +157,7 @@ class App{
 
         if(this.meshes.length > 0)
         {
-
-            //Buscar alternativa
+          //Buscar alternativa
           this.chair.visible = false;
           this.scene.background.enabled = false;
         }
